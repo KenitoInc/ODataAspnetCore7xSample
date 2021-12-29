@@ -72,6 +72,7 @@ namespace ODataAspnetCore7xSample.Controllers
             return Ok(book);
         }
 
+        #region Actions and Functions
         [EnableQuery]
         public IActionResult GetMainAuthor([FromODataUri] int key)
         {
@@ -124,5 +125,18 @@ namespace ODataAspnetCore7xSample.Controllers
             var result = DataSource.Instance.Books.AsQueryable<Book>().Where(b => b.ID == key).Select(b => b.Authors);
             return Ok(result);
         }
+        #endregion
+
+        #region Containment
+        //Contained entities don't have their own controller; the action is defined in the containing entity set controller.
+
+        // GET ~/Books(1)/Translators
+        [EnableQuery]
+        public IActionResult GetTranslators(int key)
+        {
+            var translators = DataSource.Instance.Books.Single(a => a.ID == key).Translators;
+            return Ok(translators);
+        }
+        #endregion
     }
 }

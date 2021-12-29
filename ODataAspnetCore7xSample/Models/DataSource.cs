@@ -10,7 +10,6 @@ namespace ODataAspnetCore7xSample.Models
     public class DataSource
     {
         private static DataSource instance = null;
-        DateTime date1 = new DateTime(2008, 5, 1, 8, 30, 52);
         public static DataSource Instance
         {
             get
@@ -26,6 +25,7 @@ namespace ODataAspnetCore7xSample.Models
         public List<Author> Authors { get; set; }
         public List<Publisher> Publishers { get; set; }
         public List<Address> Addresses { get; set; }
+        public List<Translator> Translators { get; set; }
 
         private DataSource()
         {
@@ -38,9 +38,21 @@ namespace ODataAspnetCore7xSample.Models
             this.Authors = new List<Author>();
             this.Publishers = new List<Publisher>();
             this.Addresses = new List<Address>();
+            this.Translators = new List<Translator>();
         }
         public void Initialize()
         {
+            this.Translators.AddRange(new List<Translator>()
+            {
+                new Translator(){ID = 100001, TranslatorName = "Translator 1"},
+                new Translator(){ID = 100002, TranslatorName = "Translator 2"},
+                new Translator(){ID = 100003, TranslatorName = "Translator 3"},
+                new Translator(){ID = 100004, TranslatorName = "Translator 4"},
+                new Translator(){ID = 100005, TranslatorName = "Translator 5"},
+                new Translator(){ID = 100006, TranslatorName = "Translator 6"},
+                new Translator(){ID = 100007, TranslatorName = "Translator 7"},
+            });
+
             this.Addresses.AddRange(new List<Address>()
             {
                 new Address(){ County = "County 1", Town = "Town 1"},
@@ -70,14 +82,14 @@ namespace ODataAspnetCore7xSample.Models
 
             this.Books.AddRange(new List<Book>()
             {
-                new Book(){ID = 1, Isbn = "AA0011", Title = "Book 1", Year = 2000, ForKids = false, Authors = new List<Author>(){Authors[0], Authors[1]}},
-                new Book(){ID = 2, Isbn = "BB0011", Title = "Book 2", Year = 2001, ForKids = true, Authors = new List<Author>(){Authors[4], Authors[1], Authors[2]}},
-                new Book(){ID = 3, Isbn = "CC0011", Title = "Book 3", Year = 2002, ForKids = false, Authors = new List<Author>(){Authors[2], Authors[3]}},
-                new Book(){ID = 4, Isbn = "DD0011", Title = "Book 4", Year = 2003, ForKids = true, Authors = new List<Author>(){Authors[0], Authors[1], Authors[1]}},
-                new Book(){ID = 5, Isbn = "EE0011", Title = "Book 5", Year = 2004, ForKids = true, Authors = new List<Author>(){Authors[0], Authors[4], Authors[3]}},
-                new Book(){ID = 6, Isbn = "FF0011", Title = "Book 6", Year = 2005, ForKids = true, Authors = new List<Author>(){Authors[3], Authors[1]}},
-                new Book(){ID = 7, Isbn = "GG0011", Title = "Book 7", Year = 2006, ForKids = true, Authors = new List<Author>(){Authors[0], Authors[1], Authors[2]}},
-                new Book(){ID = 8, Isbn = "HH0011", Title = "Book 8", Year = 2007, ForKids = false, Authors = new List<Author>(){Authors[3], Authors[4]}},
+                new Book(){ID = 1, Isbn = "AA0011", Title = "Book 1", Year = 2000, ForKids = false, Authors = new List<Author>(){Authors[0], Authors[1]}, Translators = new List<Translator>(){Translators[0], Translators[1]}},
+                new Book(){ID = 2, Isbn = "BB0011", Title = "Book 2", Year = 2001, ForKids = true, Authors = new List<Author>(){Authors[4], Authors[1], Authors[2]}, Translators = new List<Translator>(){Translators[0], Translators[2]}},
+                new Book(){ID = 3, Isbn = "CC0011", Title = "Book 3", Year = 2002, ForKids = false, Authors = new List<Author>(){Authors[2], Authors[3]}, Translators = new List<Translator>(){Translators[3], Translators[1]}},
+                new Book(){ID = 4, Isbn = "DD0011", Title = "Book 4", Year = 2003, ForKids = true, Authors = new List<Author>(){Authors[0], Authors[1], Authors[1]}, Translators = new List<Translator>(){Translators[4], Translators[2]}},
+                new Book(){ID = 5, Isbn = "EE0011", Title = "Book 5", Year = 2004, ForKids = true, Authors = new List<Author>(){Authors[0], Authors[4], Authors[3]}, Translators = new List<Translator>(){Translators[5], Translators[4]}},
+                new Book(){ID = 6, Isbn = "FF0011", Title = "Book 6", Year = 2005, ForKids = true, Authors = new List<Author>(){Authors[3], Authors[1]}, Translators = new List<Translator>(){Translators[6], Translators[3]}},
+                new Book(){ID = 7, Isbn = "GG0011", Title = "Book 7", Year = 2006, ForKids = true, Authors = new List<Author>(){Authors[0], Authors[1], Authors[2]}, Translators = new List<Translator>(){Translators[4], Translators[0]}},
+                new Book(){ID = 8, Isbn = "HH0011", Title = "Book 8", Year = 2007, ForKids = false, Authors = new List<Author>(){Authors[3], Authors[4]}, Translators = new List<Translator>(){Translators[2], Translators[5]}},
             });
         }
     }
