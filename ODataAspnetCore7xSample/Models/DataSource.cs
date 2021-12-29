@@ -44,13 +44,13 @@ namespace ODataAspnetCore7xSample.Models
         {
             this.Translators.AddRange(new List<Translator>()
             {
-                new Translator(){ID = 100001, TranslatorName = "Translator 1"},
-                new Translator(){ID = 100002, TranslatorName = "Translator 2"},
-                new Translator(){ID = 100003, TranslatorName = "Translator 3"},
-                new Translator(){ID = 100004, TranslatorName = "Translator 4"},
-                new Translator(){ID = 100005, TranslatorName = "Translator 5"},
-                new Translator(){ID = 100006, TranslatorName = "Translator 6"},
-                new Translator(){ID = 100007, TranslatorName = "Translator 7"},
+                new Translator(){TranslatorID = 100001, TranslatorName = "Translator 1"},
+                new Translator(){TranslatorID = 100002, TranslatorName = "Translator 2"},
+                new Translator(){TranslatorID = 100003, TranslatorName = "Translator 3"},
+                new Translator(){TranslatorID = 100004, TranslatorName = "Translator 4"},
+                new Translator(){TranslatorID = 100005, TranslatorName = "Translator 5"},
+                new Translator(){TranslatorID = 100006, TranslatorName = "Translator 6"},
+                new Translator(){TranslatorID = 100007, TranslatorName = "Translator 7"},
             });
 
             this.Addresses.AddRange(new List<Address>()

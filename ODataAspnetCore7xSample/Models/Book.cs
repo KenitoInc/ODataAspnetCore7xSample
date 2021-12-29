@@ -27,7 +27,7 @@ namespace ODataAspnetCore7xSample.Models
 
     public class Translator
     {
-        public int ID { get; set; }
+        public int TranslatorID { get; set; }
         public string TranslatorName { get; set; }
     }
 }

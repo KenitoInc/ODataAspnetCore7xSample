@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Net;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
 using ODataAspnetCore7xSample.Models;
 
@@ -134,8 +136,44 @@ namespace ODataAspnetCore7xSample.Controllers
         [EnableQuery]
         public IActionResult GetTranslators(int key)
         {
-            var translators = DataSource.Instance.Books.Single(a => a.ID == key).Translators;
+            var translators = DataSource.Instance.Books.Single(b => b.ID == key).Translators;
             return Ok(translators);
+        }
+
+        // GET ~/Books(1)/Translators(100001)
+        [EnableQuery]
+        [ODataRoute("Books({bookId})/Translators({TranslatorID})")]
+        public IActionResult GetSingleTranslator(int bookId, int translatorId)
+        {
+            var translators = DataSource.Instance.Books.Single(b => b.ID == bookId).Translators;
+            var translator = translators.Single(t => t.TranslatorID == translatorId);
+            return Ok(translator);
+        }
+
+        // PUT ~/Books(1)/Translators(100001)
+        [ODataRoute("Books({bookId})/Translators({TranslatorID})")]
+        public IActionResult PutToTranslator(int bookId, int TranslatorID, [FromBody] Translator translator)
+        {
+            var book = DataSource.Instance.Books.Single(b => b.ID == bookId);
+            var originalTranslator = book.Translators.Single(t => t.TranslatorID == TranslatorID);
+            originalTranslator.TranslatorName = translator.TranslatorName;
+            return Ok(translator);
+        }
+
+        // DELETE ~/Books(1)/Translators(100001)
+        [ODataRoute("Books({bookId})/Translators({TranslatorID})")]
+        public IActionResult DeleteTranslatorFromBook(int bookId, int TranslatorID)
+        {
+            var book = DataSource.Instance.Books.Single(b => b.ID == bookId);
+            var originalTranslator = book.Translators.Single(t => t.TranslatorID == TranslatorID);
+            if (book.Translators.Remove(originalTranslator))
+            {
+                return NoContent();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
         #endregion
     }
