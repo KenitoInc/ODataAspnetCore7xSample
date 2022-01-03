@@ -40,6 +40,8 @@ namespace ODataAspnetCore7xSample
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseODataBatching();
+
             app.UseRouting();
 
             app.UseAuthorization();
