@@ -10,6 +10,7 @@ namespace ODataAspnetCore7xSample.Controllers
 {
     public class BooksController : ODataController
     {
+        #region CRUD operations
         // Get ~/Books
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, MaxTop = 1, PageSize = 100, MaxExpansionDepth = 5)]
         public IQueryable<Book> Get()
@@ -73,6 +74,7 @@ namespace ODataAspnetCore7xSample.Controllers
 
             return Ok(book);
         }
+        #endregion
 
         #region Actions and Functions
         [EnableQuery]
