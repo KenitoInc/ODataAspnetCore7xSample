@@ -3,10 +3,10 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
-using ODataAspnetCore7xSample.Models;
+using Lab01Sample01.Models;
 using Microsoft.OData;
 
-namespace ODataAspnetCore7xSample.Controllers
+namespace Lab01Sample01.Controllers
 {
     public class BooksController : ODataController
     {
@@ -56,7 +56,7 @@ namespace ODataAspnetCore7xSample.Controllers
             var book = DataSource.Instance.Books.Where(b => b.ID == key);
             if (book == null)
             {
-                return NotFound($"Book with ID: {key} not found");
+                return NotFound();
             }
 
             return Ok(book);
@@ -69,13 +69,7 @@ namespace ODataAspnetCore7xSample.Controllers
             var book = DataSource.Instance.Books.Where(b => b.ID == key);
             if (book == null)
             {
-                ODataError error = new ODataError
-                {
-                    Message = $"Book with ID: {key} not found",
-                    ErrorCode = "404"
-                };
-
-                return NotFound(error);
+                return NotFound();
             }
 
             return Ok(book);
@@ -145,45 +139,6 @@ namespace ODataAspnetCore7xSample.Controllers
             {
                 return BadRequest();
             }
-        }
-        #endregion
-
-        #region Actions and Functions
-        // GET /Books/MostRecent()
-        // This is a bound function. It's bound to the entity set Books.
-        public IActionResult MostRecent()
-        {
-            var product = DataSource.Instance.Books.Max(x => x.ID);
-            return Ok(product);
-        }
-
-        // POST /Books(1)/Rate
-        // Body has { Rating: 7 }
-        // This is bound Action. The action is bound to the Books entity set.
-        public IActionResult Rate([FromODataUri] int key, ODataActionParameters parameters)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            int rating = (int)parameters["Rating"];
-
-            if (rating < 0)
-            {
-                return BadRequest();
-            }
-
-            return Ok(new BookRating() { BookID = key, Rating = rating });
-        }
-
-        // GET ReturnAllForKidsBooks()
-        // This is an unbound Function.
-        [HttpGet("/odata/ReturnAllForKidsBooks()")]
-        public IActionResult ReturnAllForKidsBooks()
-        {
-            var forKidsBooks = DataSource.Instance.Books.Where(m => m.ForKids == true);
-            return Ok(forKidsBooks);
         }
         #endregion
     }

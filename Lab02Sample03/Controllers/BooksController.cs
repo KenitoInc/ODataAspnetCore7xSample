@@ -1,12 +1,13 @@
 ﻿using System.Linq;
+using System.Net;
 using Microsoft.AspNet.OData;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Mvc;
-using ODataAspnetCore7xSample.Models;
+using Lab02Sample03.Models;
 using Microsoft.OData;
 
-namespace ODataAspnetCore7xSample.Controllers
+namespace Lab02Sample03.Controllers
 {
     public class BooksController : ODataController
     {
